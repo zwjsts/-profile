@@ -1,0 +1,83 @@
+<!doctype html> 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>zwjsts — worldbuilding</title>
+  <style>
+    /* Basic reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:#000; color:#fff; -webkit-font-smoothing:antialiased;
+      display:flex; align-items:center; justify-content:center; padding:24px;
+      overflow:auto;
+    }
+
+    /* Container */
+    .card{
+      width:min(880px,92vw);
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border-radius:14px; padding:36px; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    h1{font-size:clamp(20px,3.6vw,34px); margin-bottom:10px; letter-spacing:0.02em}
+    p.lead{color:#e6eefc; font-size:clamp(14px,1.6vw,18px); line-height:1.6; margin-bottom:18px}
+    p.small{color:#bfc8d4; font-size:13px}
+
+    nav{display:flex; gap:12px; margin-top:18px}
+    a.btn{display:inline-block; padding:8px 12px; border-radius:8px; background:rgba(255,255,255,0.03); color:#cfe8ff; text-decoration:none; font-size:13px; border:1px solid rgba(158,203,255,0.08)}
+    a.btn:hover{filter:brightness(1.1);}
+
+    /* Animated lights layer */
+    .lights{
+      position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen;
+    }
+    .light{
+      position:absolute; width:420px; height:420px; border-radius:50%; filter:blur(60px);
+      transform:translate(-50%,-50%);
+      opacity:0.85;
+      animation: drift 18s ease-in-out infinite alternate;
+      background: radial-gradient(circle at 30% 30%, rgba(170,200,255,0.9) 0%, rgba(120,160,255,0.6) 20%, rgba(20,30,60,0.0) 60%);
+    }
+    .light.two{ width:520px; height:520px; animation-duration:26s; background: radial-gradient(circle at 40% 40%, rgba(220,240,255,0.9) 0%, rgba(160,200,255,0.45) 25%, rgba(10,20,30,0.0) 65%);}
+    .light.three{ width:360px; height:360px; animation-duration:22s; background: radial-gradient(circle at 60% 60%, rgba(180,210,255,0.85) 0%, rgba(120,150,200,0.35) 20%, rgba(0,0,0,0.0) 60%)}
+
+    @keyframes drift{
+      0%{transform:translate(-30%, -20%) scale(1)}
+      100%{transform:translate(80%, 70%) scale(1.05)}
+    }
+
+    /* Slight vignette */
+    .vignette{ position:absolute; inset:0; pointer-events:none; background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.5)); mix-blend-mode:multiply }
+
+    /* Responsive tweaks */
+    @media (max-width:560px){ .card{padding:20px} h1{font-size:20px} }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="lights">
+      <div class="light" style="left:10%; top:20%; opacity:0.9"></div>
+      <div class="light two" style="left:85%; top:10%; opacity:0.8"></div>
+      <div class="light three" style="left:60%; top:80%; opacity:0.7"></div>
+    </div>
+
+    <h1>zwjsts</h1>
+    <p class="lead">I want to make things with people around the world.<br>I make games and art, step by step.</p>
+
+    <nav>
+      <a class="btn" href="https://instagram.com/your-instagram" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn" href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://zwjsts.itch.io/" target="_blank" rel="noopener">itch.io</a>
+    </nav>
+
+    <p class="small" style="margin-top:18px">This is a simple landing page. Replace links above with your real handles. Host this file on GitHub Pages to use as your main public page, then link to it from your itch.io profile and project descriptions.</p>
+
+    <div class="vignette"></div>
+  </div>
+</body>
+</html>
