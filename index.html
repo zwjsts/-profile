@@ -10,17 +10,48 @@
     * { box-sizing:border-box; margin:0; padding:0; }
     html,body { height:100%; }
 
-    body {
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
-      background: radial-gradient(circle at top, #0d1b33 0%, #000 70%);
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      overflow:auto;
-      -webkit-font-smoothing: antialiased;
-    }
+    /* === Page-level blue lights (added) === */
+body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 140%;
+  height: 60%;
+  background: radial-gradient(
+    circle at 30% 40%,
+    rgba(80,120,255,0.45),
+    rgba(10,20,40,0.7) 70%
+  );
+  filter: blur(90px);
+  z-index: -3;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -20%;
+  right: -15%;
+  width: 150%;
+  height: 70%;
+  background: radial-gradient(
+    circle at 70% 80%,
+    rgba(110,160,255,0.40),
+    rgba(10,20,40,0.75) 70%
+  );
+  filter: blur(100px);
+  z-index: -3;
+}
+
+/* Card slightly more transparent (image looks brighter) */
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.07),
+    rgba(255,255,255,0.03)
+  );
+  backdrop-filter: blur(12px);
+}
 
     /* Card */
     .card {
