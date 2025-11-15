@@ -1,111 +1,150 @@
-<!doctype html> 
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>zwjsts — worldbuilding</title>
+
   <style>
-    /* Basic reset */
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background:#000; color:#fff; -webkit-font-smoothing:antialiased;
-      display:flex; align-items:center; justify-content:center; padding:24px;
+    /* Reset */
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html,body { height:100%; }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
+      background: radial-gradient(circle at top, #0d1b33 0%, #000 70%);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
       overflow:auto;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Container */
-    .card{
+    /* Card */
+    .card {
       width:min(880px,92vw);
-      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      border-radius:14px; padding:36px; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 6px 30px rgba(0,0,0,0.6);
-      backdrop-filter: blur(6px);
+      background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border-radius:14px;
+      padding:36px;
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 6px 30px rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
     }
 
-    h1{font-size:clamp(20px,3.6vw,34px); margin-bottom:10px; letter-spacing:0.02em}
-    p.lead{color:#e6eefc; font-size:clamp(14px,1.6vw,18px); line-height:1.6; margin-bottom:18px}
-    p.small{color:#bfc8d4; font-size:13px}
+    h1 { font-size:clamp(20px,3.6vw,34px); margin-bottom:10px; }
+    p.lead { color:#f2f6ff; font-size:clamp(14px,1.6vw,18px); margin-bottom:18px; line-height:1.6; }
 
-    nav{display:flex; gap:12px; margin-top:18px}
-    a.btn{display:inline-block; padding:8px 12px; border-radius:8px; background:rgba(255,255,255,0.03); color:#cfe8ff; text-decoration:none; font-size:13px; border:1px solid rgba(158,203,255,0.08)}
-    a.btn:hover{filter:brightness(1.1);}
-
-    /* Animated lights layer */
-    .lights{
-      position:absolute; inset:0; pointer-events:none; mix-blend-mode:screen;
+    nav { display:flex; gap:12px; margin-top:18px; }
+    a.btn {
+      padding:8px 12px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.05);
+      color:#dff1ff;
+      text-decoration:none;
+      font-size:13px;
+      border:1px solid rgba(150,190,255,0.20);
     }
-    .light{
-      position:absolute; width:420px; height:420px; border-radius:50%; filter:blur(60px);
+    a.btn:hover { filter: brightness(1.1); }
+
+    /* Lights */
+    .lights {
+      position:absolute; inset:0;
+      pointer-events:none;
+      mix-blend-mode:lighten;
+    }
+
+    .light {
+      position:absolute;
+      width:420px; height:420px;
+      border-radius:50%;
+      filter:blur(70px);
       transform:translate(-50%,-50%);
       opacity:1;
       animation: drift 18s ease-in-out infinite alternate;
       background: radial-gradient(circle at 30% 30%,
-    rgba(255,255,255,1) 0%,
-    rgba(140,180,255,0.95) 22%,
-    rgba(30,60,120,0) 65%);
-    .light.two{ width:520px; height:520px; animation-duration:26s; background: radial-gradient(circle at 40% 40%, rgba(220,240,255,0.9) 0%, rgba(160,200,255,0.45) 25%, rgba(10,20,30,0.0) 65%);}
-    .light.three{ width:360px; height:360px; animation-duration:22s; background: radial-gradient(circle at 60% 60%, rgba(180,210,255,0.85) 0%, rgba(120,150,200,0.35) 20%, rgba(0,0,0,0.0) 60%)}
-
-    @keyframes drift{
-      0%{transform:translate(-30%, -20%) scale(1)}
-      100%{transform:translate(80%, 70%) scale(1.05)}
+        rgba(255,255,255,1) 0%,
+        rgba(150,180,255,0.9) 20%,
+        rgba(20,40,80,0) 70%);
     }
 
-    /* Slight vignette */
-    .vignette{ position:absolute; inset:0; pointer-events:none; background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.5)); mix-blend-mode:multiply }
+    .light.two {
+      width:520px; height:520px;
+      animation-duration:26s;
+      background: radial-gradient(circle at 40% 40%,
+        rgba(230,245,255,1) 0%,
+        rgba(160,200,255,0.7) 25%,
+        rgba(15,25,40,0) 70%);
+    }
 
-    /* Responsive tweaks */
-    @media (max-width:560px){ .card{padding:20px} h1{font-size:20px} }
+    .light.three {
+      width:360px; height:360px;
+      animation-duration:22s;
+      background: radial-gradient(circle at 60% 60%,
+        rgba(210,230,255,0.95) 0%,
+        rgba(130,160,220,0.5) 25%,
+        rgba(0,0,0,0) 60%);
+    }
+
+    @keyframes drift {
+      0% { transform:translate(-30%, -20%) scale(1); }
+      100% { transform:translate(80%, 70%) scale(1.05); }
+    }
+
+    .vignette {
+      position:absolute; inset:0;
+      pointer-events:none;
+      background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.45));
+      mix-blend-mode:multiply;
+    }
+
   </style>
 </head>
+
 <body>
   <div class="card">
+
+    <!-- Lights -->
     <div class="lights">
-      <div class="light" style="left:10%; top:20%; opacity:0.9"></div>
-      <div class="light two" style="left:85%; top:10%; opacity:0.8"></div>
-      <div class="light three" style="left:60%; top:80%; opacity:0.7"></div>
+      <div class="light" style="left:12%; top:22%;"></div>
+      <div class="light two" style="left:85%; top:12%;"></div>
+      <div class="light three" style="left:60%; top:82%;"></div>
     </div>
 
     <h1>zwjsts</h1>
-    <p class="lead">I want to make things with people around the world.<br>I make games and art, step by step.</p>
-
-    <nav>
-      <a class="btn" href="https://instagram.com/your-instagram" target="_blank" rel="noopener">Instagram</a>
-      <a class="btn" href="https://github.com/your-github" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://zwjsts.itch.io/" target="_blank" rel="noopener">itch.io</a>
-    </nav>
-
-    <!-- Instagram project section -->
-<section class="insta-section" style="margin-top:36px; text-align:left;">
-  <h2 style="font-size:clamp(16px,2.2vw,22px); margin-bottom:10px; color:#e6eefc;">
-    Instagram Project
-  </h2>
-
-  
-  <div style="display:flex; align-items:center; flex-wrap:wrap;">
-
-    
-    <p style="color:#dce6fa; font-size:clamp(14px,1.5vw,17px); 
-              line-height:1.6; margin-bottom:12px;">
-      I’m managing a character content project on Instagram.<br>
-      People from all over the world can take part in it.<br>
-      Let’s create characters and build a world together.<br>
-      If you’re interested, click this icon! →
+    <p class="lead">
+      I want to make things with people around the world.<br>
+      I make games and art, step by step.
     </p>
 
-    
-    <a href="https://www.instagram.com/4seasonalgirls?igsh=NWMwOWlkZ3Q4czky"
-       target="_blank" rel="noopener"
-       style="margin-left:10px; display:inline-block;">
-      <img src="Instagram icon.PNG"
-           style="width:52px; height:52px; border-radius:10px; filter:brightness(1.12);">
-    </a>
+    <nav>
+      <a class="btn" href="https://instagram.com/your-instagram" target="_blank">Instagram</a>
+      <a class="btn" href="https://github.com/your-github" target="_blank">GitHub</a>
+      <a class="btn" href="https://zwjsts.itch.io/" target="_blank">itch.io</a>
+    </nav>
 
-  </div>
-</section>
+    <!-- Instagram Project -->
+    <section style="margin-top:36px; text-align:left;">
+      <h2 style="font-size:clamp(16px,2.2vw,22px); margin-bottom:10px; color:#e6eefc;">Instagram Project</h2>
 
+      <div style="display:flex; align-items:center; flex-wrap:wrap;">
+        <p style="color:#e8f0ff; font-size:clamp(14px,1.5vw,17px); margin-bottom:12px; line-height:1.6;">
+          I’m managing a character content project on Instagram.<br>
+          People from all over the world can take part in it.<br>
+          Let’s create characters and build a world together.<br>
+          If you’re interested, click this icon! →
+        </p>
+
+        <a href="https://www.instagram.com/4seasonalgirls?igsh=NWMwOWlkZ3Q4czky"
+           target="_blank" style="margin-left:10px;">
+          <img src="Instagram icon.PNG"
+               style="width:52px; height:52px; border-radius:10px; filter:brightness(1.15);">
+        </a>
+      </div>
+    </section>
 
     <div class="vignette"></div>
   </div>
